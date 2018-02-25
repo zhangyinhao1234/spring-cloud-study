@@ -98,5 +98,7 @@
 
 	<modules>
 		<module>cloud-eureka-server</module>
+		<module>cloud-eureka-server-A</module>
+		<module>cloud-eureka-server-B</module>
 	</modules>
 </project>
