@@ -1,0 +1,8 @@
+/cloud-package-dep/.classpath
+/cloud-package-dep/.project
+/cloud-package-dep/.settings/org.eclipse.core.resources.prefs
+/cloud-package-dep/.settings
+/cloud-package-dep/cloud-eureka-server/.classpath
+/cloud-package-dep/cloud-eureka-server/.gitignore
+/cloud-package-dep/cloud-eureka-server/.settings
+/cloud-package-dep/cloud-eureka-server/*.project
