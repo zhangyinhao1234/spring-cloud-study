@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/1.css}" rel="stylesheet"/>
+    <title th:text="${title}" ></title>
+    
+
+    
+</head>
+
+<body>
+<p th:text="'Hello, ' + ${title}" /><br/>
+<span th:text="${title}"> </span> 
+<span th:text="${#locale.country}"> </span> 
+
+<script th:src="@{/js/hello.js}"></script>
+
+
+
+<script th:inline="javascript" >
+//[[...]]内联文本的表示方式，使用时，必须先用th:inline="text/javascript/none"激活，th:inline可以在父级标签内使用，甚至作为body的标签。内联文本尽管比th:text的代码少，但是不利于原型显示。
+
+	function go(id){
+//     	alert(id);
+    }
+    
+	var title = [[${title}]];
+	
+	//使用后台给的值
+	var hh = /*[[${id}]]*/ "Gertrud Kiwifruit";
+// 	alert(title);
+//     hi();
+    
+    //方法传值  id过长会被舍去尾数 用 '' 转成 字符
+    var id = '[[${id}]]';
+    
+    go(id)
+    
+</script>
+
+<a href="go" th:href="@{'/view/index.htm?id=' + ${id}}" >网页跳转标签设置参数</a>
+<br/>
+<!-- 使用  | 进行字符的拼接 &在thymeleaf 是属于特殊字符要用  &amp; 代替 -->
+<a href="go" th:href="@{|/view/index.htm?id=${id}&amp;count=${id}|}" >网页跳转标签设置参数(字符串拼接多参数)</a>
+<br/>
+<!-- rest 风格的请求  多个地址变量参数的用 ， 隔开 -->
+<a href="go" th:href="@{/view/{idp}/{cc}/index(idp = ${id},cc=${count} )}" >网页跳转标签设置参数</a>
+
+<!-- if 判断是否显示 a input 标签 unless 正好和if相反 -->
+<a th:if="${count=='124'}" > 显示 </a>
+<input th:if="${count=='123'}" th:value="${count}" th:attr="readOnly=true" type="text" />
+<input th:unless="${count=='123'}" type="text" />
+<!-- 三木运算符 -->
+<p th:text="${count=='123'} ? '123' : '456' "  >hi</p>
+<!-- 对于需要使用富文本标签的 -->
+<p th:utext="${content}">00</p>
+<!-- 对于需要使用富文本标签的  字符拼接-->
+<p th:utext="${content + count}" >00</p>
+<!-- 字符串进行拼接 -->
+<p th:text="${id} + '  hello: ' +| ${title},d ${count},${pro} | ">1</p>
+<!-- with 局部变量 -->
+<div th:with="pro=${id % 100 }">
+<!-- 后台对象调用方法 -->
+<p th:if="${stru.isNotBlank(count)}" th:text="${pro}">00</p>
+</div>
+<!-- <button th:onclick="hi();">hi</button> -->
+
+
+<!-- 循环 
+iterStat称作状态变量，属性有：
+index:当前迭代对象的index（从0开始计算）
+count: 当前迭代对象的index(从1开始计算)
+size:被迭代对象的大小
+current:当前迭代变量
+even/odd:布尔值，当前循环是否是偶数/奇数（从0开始计算）
+first:布尔值，当前循环是否是第一个
+last:布尔值，当前循环是否是最后一个
+-->
+<table>
+  <tr  th:each="user,iterStat : ${users}"> 
+  	 <th scope="row" th:text="${iterStat.index}">1</th>
+     <th scope="row" th:text="${user.id}">1</th>
+     <td>
+     <!-- attr 一次设置多个值 -->
+     	<img alt="" src="" width="20px" th:src="${user.imageUrl}" th:attr="title=${id},alt=${count}"/>
+     </td>
+     <!-- 使用java方法也是一样的 -->
+     <td th:text="${user.get('name')}">Mark</td>
+     <td th:text="${user.age}">2</td>
+     <!-- 计算 ! 非 支持 and or ！ not 运算符 -->
+     <td th:text="2014 % 100 + 3 - 2*4 + 4/2 " th:if="${user.age} == '23' and 1==1 and !(${user.age} > 23) " >2</td>
+ </tr>
+ 
+</table>
+<!-- attr 参数替换设置 -->
+ <form action="go" th:attr="action=${count}" >
+ </form>
+ <form action="go" th:action="${id}" >
+ </form>
+
+</body>
+</html>
