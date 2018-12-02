@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: mybatis-A
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/dump20161027?createDatabaseIfNotExist=true&allowMultiQueries=true&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false
+    username: root
+    password: 123456Aa
+    driver-class-name: com.mysql.jdbc.Driver
+  druid:
+    initialSize: 1
+    minIdle: 1
+    maxActive: 100
+    testOnBorrow: true
+
+server:
+  port: 9032
+  tomcat:
+    max-http-header-size: 102400
+  maxHttpHeaderSize: 10240000
+
+
+eureka:
+  client:
+    #serviceUrl:
+     # defaultZone: http://127.0.0.1:8001/eureka/
+    register-with-eureka : false
+
+management.security.enabled: false
+
+logging:
+    level:
+        tk.mybatis: TRACE
+
+mybatis:
+    type-aliases-package: com.github.zhangyinhao1234.study.mybatis.server.entity
+    type-aliases-super-type: com.github.zhangyinhao1234.study.mybatis.base.BaseEntity
+    mapper-locations: classpath*:mapper/*.xml
+    table:
+      auto: update
+    model:
+      pack: com.github.zhangyinhao1234.study.mybatis.server.entity
+    database:
+      type: mysql
+
+mapper:
+    mappers:
+        - com.github.zhangyinhao1234.study.mybatis.base.BaseMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+
+# 日志配置
+logging.config: classpath:logback-dev.xml
