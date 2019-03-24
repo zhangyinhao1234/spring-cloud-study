@@ -59,10 +59,10 @@
      </appender>
 	
 	
-	<root level="error">
-		<appender-ref ref="stash" />
+	<root level="info">
+<!-- 		<appender-ref ref="stash" /> -->
 		<appender-ref ref="console" />
-		<appender-ref ref="file" />
+<!-- 		<appender-ref ref="file" /> -->
 	</root>
 	
 <!-- 	<logger name="tcm.cloud.action" level="info" additivity="false"> -->

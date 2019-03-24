@@ -98,11 +98,11 @@
 			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 
-		<dependency>
-			<groupId>tcm.cloud</groupId>
-			<artifactId>spring-cloud-hello-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>tcm.cloud</groupId> -->
+<!-- 			<artifactId>spring-cloud-hello-api</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
 	</dependencies>
 
 </project>
